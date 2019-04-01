@@ -1,4 +1,4 @@
-# Pur Beurre :fr:
+# Pur Beurre
 
 :construction: In contruction
 
