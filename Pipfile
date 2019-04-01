@@ -11,6 +11,7 @@ pylint = "*"
 [packages]
 django = "*"
 django-heroku = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.7"
