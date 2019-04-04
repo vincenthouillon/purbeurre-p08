@@ -1,0 +1,150 @@
+#logo {
+  width: 40px;
+  margin: -25px 5px -20px 0;
+}
+
+body {
+  font-family: "Scope one", sans-serif;
+}
+
+/* NO TRANSPARENT MAINNAV */
+#mainNav {
+  background-color: rgba(255, 255, 255, 0.060);
+  /* border-bottom: 3px solid #c45525; */
+}
+
+/* #mainNav .navbar-brand {
+  color: #212529;
+} */
+
+#mainNav .navbar-brand:hover {
+  color: #c45525;
+}
+
+/* #mainNav .navbar-nav .nav-item .nav-link {
+  color: #212529;
+} */
+
+#mainNav .navbar-nav .nav-item .nav-link:hover {
+  color: #c45525;
+}
+
+/* END NO TRANSPARENT MAINNAV */
+
+svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+
+.fas {
+  font-size: 25px;
+}
+
+.nav-txt {
+  display: none;
+}
+
+#nav-search {
+  background-color: #cbc8c5;
+  color: #345a61;
+  border: none;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  padding: 2px;
+  padding-inline-start: 10px;
+  margin-right: 10px;
+}
+
+.masthead h1,
+.masthead h2 {
+  font-family: "Open sans", sans-serif;
+}
+
+.masthead h1 {
+  margin-bottom: 40px;
+}
+
+.masthead h2 {
+  font-size: 1.5em;
+}
+
+#search-btn {
+  border: 1px solid #c45525;
+  background-color: #c45525;
+  color: white;
+  height: 40px;
+}
+
+#search {
+  border: none;
+}
+
+#search-txt {
+  border: 1px solid #c45525;
+  padding-inline-start: 10px;
+  height: 40px;
+  color: #345a61;
+}
+
+.page-section h2,
+.page-section h3 {
+  font-family: "Open sans", sans-serif;
+  color: #c45525;
+}
+
+.page-section p,
+.page-section a {
+  font-family: "Scope one", sans-serif;
+  color: #345a61;
+}
+
+.page-section .divider,
+.masthead .divider {
+  border-color: #c45525;
+}
+
+.page-section img {
+  height: 300px;
+}
+
+#contact {
+  background-color: #e8a75d;
+}
+
+footer {
+  background-color: #345a61;
+  text-align: center;
+  height: 60px;
+}
+
+footer a {
+  margin-top: 20px;
+  color: #86ebe6;
+}
+
+footer a:hover {
+  text-decoration: none;
+}
+
+.fa-envelope,
+.fa-phone {
+  color: #345a61;
+}
+
+
+@media only screen and (max-width:991.98px) {
+  .nav-txt {
+    display: inline-block;
+  }
+
+  #mainNav {
+    background-color: rgba(255, 255, 255, 1);
+    /* border-bottom: 3px solid #c45525; */
+  }
+
+  .fas {
+    margin-right: 5px;
+  }
+}
