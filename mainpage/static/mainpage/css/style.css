@@ -1,3 +1,12 @@
+/* VARIABLE DECLARATION */
+:root {
+  --dark-orange: #c45525;
+  --light-orange: #e8a75d;
+  --dark-blue: #345a61;
+  --light-blue: #86ebe6;
+}
+
+/* CSS */
 #logo {
   width: 40px;
   margin: -25px 5px -20px 0;
@@ -7,10 +16,18 @@ body {
   font-family: "Scope one", sans-serif;
 }
 
+.alert {
+  position: absolute;
+  margin-top: 72px;
+  text-align: center;
+  width: 100%;
+  border-radius: 0;
+}
+
 /* NO TRANSPARENT MAINNAV */
 #mainNav {
-  background-color: rgba(255, 255, 255, 0.060);
-  /* border-bottom: 3px solid #c45525; */
+  background-color: rgba(0, 0, 0, 0.060);
+  /* border-bottom: 3px solid var(--dark-orange); */
 }
 
 /* #mainNav .navbar-brand {
@@ -18,7 +35,7 @@ body {
 } */
 
 #mainNav .navbar-brand:hover {
-  color: #c45525;
+  color: var(--dark-orange);
 }
 
 /* #mainNav .navbar-nav .nav-item .nav-link {
@@ -26,9 +43,8 @@ body {
 } */
 
 #mainNav .navbar-nav .nav-item .nav-link:hover {
-  color: #c45525;
+  color: var(--dark-orange);
 }
-
 /* END NO TRANSPARENT MAINNAV */
 
 svg {
@@ -47,7 +63,7 @@ svg {
 
 #nav-search {
   background-color: #cbc8c5;
-  color: #345a61;
+  color: var(--dark-blue);
   border: none;
   border-radius: 2px;
   -moz-border-radius: 2px;
@@ -71,8 +87,8 @@ svg {
 }
 
 #search-btn {
-  border: 1px solid #c45525;
-  background-color: #c45525;
+  border: 1px solid var(--dark-orange);
+  background-color: var(--dark-orange);
   color: white;
   height: 40px;
 }
@@ -82,27 +98,27 @@ svg {
 }
 
 #search-txt {
-  border: 1px solid #c45525;
+  border: 1px solid var(--dark-orange);
   padding-inline-start: 10px;
   height: 40px;
-  color: #345a61;
+  color: var(--dark-blue);
 }
 
 .page-section h2,
 .page-section h3 {
   font-family: "Open sans", sans-serif;
-  color: #c45525;
+  color: var(--dark-orange);
 }
 
 .page-section p,
 .page-section a {
   font-family: "Scope one", sans-serif;
-  color: #345a61;
+  color: var(--dark-blue);
 }
 
 .page-section .divider,
 .masthead .divider {
-  border-color: #c45525;
+  border-color: var(--dark-orange);
 }
 
 .page-section img {
@@ -110,18 +126,18 @@ svg {
 }
 
 #contact {
-  background-color: #e8a75d;
+  background-color: var(--light-orange);
 }
 
 footer {
-  background-color: #345a61;
+  background-color: var(--dark-blue);
   text-align: center;
   height: 60px;
 }
 
 footer a {
   margin-top: 20px;
-  color: #86ebe6;
+  color: var(--light-blue);
 }
 
 footer a:hover {
@@ -130,18 +146,37 @@ footer a:hover {
 
 .fa-envelope,
 .fa-phone {
-  color: #345a61;
+  color: var(--dark-blue);
 }
 
+.users {
+  padding-top: 140px;
+  height: 100%;
+  margin-bottom: -60px;
+  background-color: var(--light-orange);
+}
 
+.btn-register {
+  background-color: var(--dark-blue);
+  border: none;
+  padding: 5px 20px;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-register:hover {
+  background-color: var(--dark-orange);
+}
+
+/* ############################# MEDIA QUERIES ############################# */
 @media only screen and (max-width:991.98px) {
   .nav-txt {
     display: inline-block;
   }
 
   #mainNav {
-    background-color: rgba(255, 255, 255, 1);
-    /* border-bottom: 3px solid #c45525; */
+    background-color: #ffffff;
+    /* border-bottom: 3px solid var(--dark-orange); */
   }
 
   .fas {
