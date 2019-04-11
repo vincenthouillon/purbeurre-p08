@@ -110,6 +110,10 @@ svg {
   color: var(--dark-orange);
 }
 
+.page-section h4 {
+  text-align: center;
+}
+
 .page-section p,
 .page-section a {
   font-family: "Scope one", sans-serif;

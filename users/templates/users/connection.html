@@ -1,6 +1,6 @@
 {% extends 'app/base.html' %}
 
-{% block head_title %}Inscription{% endblock %}
+{% block head_title %}Connexion{% endblock %}
 
 {% block content %}
 <div class="users">
@@ -8,16 +8,16 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Rejoignez-nous aujourd'hui !</legend>
+                <legend class="border-bottom mb-4">Connectez-vous</legend>
                 {{ form.as_p }}
             </fieldset>
             <div class="form-group">
-                <button class="btn-register" type="submit">S'inscrire</button>
+                <button class="btn-register" type="submit">Se connecter</button>
             </div>
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
-                    Vous avez déjà un compte? <a class="ml-2" href="{% url 'users:connection' %}">Se connecter</a>
+                Vous n'avez pas de compte? <a class="ml-2" href="{% url 'users:register' %}">S'inscrire</a>
             </small>
         </div>
     </div>

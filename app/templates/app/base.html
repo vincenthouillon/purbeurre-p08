@@ -7,32 +7,33 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="{% static 'mainpage/img/logo_pur_beurre-favicon.png' %}" />
+    <link rel="icon" type="image/png" href="{% static 'app/img/logo_pur_beurre-favicon.png' %}" />
     <meta name="description" content="Du gras, oui, mais de qualité">
     <meta name="author" content="Vincent Houillon">
 
-    <title>Pur Beurre</title>
+    <title>Pur Beurre - {% block head_title %}{% endblock %}</title>
 
     <!-- Font Awesome Icons -->
-    <link href="{% static 'mainpage/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'app/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
 
     <!-- Google Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Scope+One" type="text/css">
 
     <!-- Plugin CSS -->
-    <link href="{% static 'mainpage/vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+    <link href="{% static 'app/vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
 
     <!-- Theme CSS - Includes Bootstrap -->
-    <link href="{% static 'mainpage/css/creative.min.css' %}" rel="stylesheet">
-    <link href="{% static 'mainpage/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/creative.min.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/style.css' %}" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
     {% if messages %}
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} ">
+    <div class="alert alert-{{ message.tags }} alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         {{ message }}
     </div>
     {% endfor %}
@@ -41,9 +42,17 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container">
+            <!-- Condition to keep the scroll-js function on the home page -->
+            {% if request.path == '/' %}
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                <img id="logo" src="{% static 'mainpage/img/logo_pur_beurre.png' %}" alt="logo pur beurre">
+                <img id="logo" src="{% static 'app/img/logo_pur_beurre.png' %}" alt="logo pur beurre">
                 Pur Beurre</a>
+            {% else %}
+            <a class="navbar-brand js-scroll-trigger" href="{% url 'app:home' %}">
+                <img id="logo" src="{% static 'app/img/logo_pur_beurre.png' %}" alt="logo pur beurre">
+                Pur Beurre</a>
+            {% endif %}
+
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -58,11 +67,14 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" title="Mon compte" href="#"><i class="fas fa-user"></i>
+                        <a class="nav-link" title="Mon compte" href="{% url 'users:register' %}"><i
+                                class="fas fa-user"></i>
                             <span class="nav-txt">Mon compte</span>
                         </a>
 
                     </li>
+
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" title="Mes aliments" href="#">
                             <!-- <svg>
@@ -71,7 +83,6 @@
                             <i class="fas fa-carrot"></i>
                             <span class="nav-txt">Mes aliments</span>
                         </a>
-
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" title="Déconnexion" href="#logout"><i class="fas fa-sign-out-alt"></i>
@@ -79,13 +90,14 @@
 
                         </a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
 
 
-    
+
 
     {% block content %}{% endblock %}
 
@@ -101,15 +113,15 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'mainpage/vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'mainpage/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'app/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'app/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="{% static 'mainpage/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
-    <script src="{% static 'mainpage/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'app/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'app/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="{% static 'mainpage/js/creative.min.js' %}"></script>
+    <script src="{% static 'app/js/creative.min.js' %}"></script>
 
 </body>
 
