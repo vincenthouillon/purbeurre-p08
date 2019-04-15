@@ -26,7 +26,7 @@ body {
 
 /* NO TRANSPARENT MAINNAV */
 #mainNav {
-  background-color: rgba(0, 0, 0, 0.060);
+  background-color: rgba(0, 0, 0, 0.30);
   /* border-bottom: 3px solid var(--dark-orange); */
 }
 
@@ -45,6 +45,7 @@ body {
 #mainNav .navbar-nav .nav-item .nav-link:hover {
   color: var(--dark-orange);
 }
+
 /* END NO TRANSPARENT MAINNAV */
 
 svg {
@@ -62,7 +63,7 @@ svg {
 }
 
 #nav-search {
-  background-color: #cbc8c5;
+  background-color: #e3d6c6;
   color: var(--dark-blue);
   border: none;
   border-radius: 2px;
@@ -133,10 +134,30 @@ svg {
   background-color: var(--light-orange);
 }
 
+.banner{
+  height: 160px;
+  color: #ffffff;
+  text-shadow: 1px 1px 10px black;
+  margin-top: -28px;
+  margin-bottom: 20px;
+  background-color: #345a61;
+  background-image: url('../img/bg-masthead-2.jpg');
+  background-size: cover;
+  letter-spacing: 2px;
+}
+
+.banner h2 {
+  padding-top: 35px;
+}
+
 footer {
+  position: relative;
   background-color: var(--dark-blue);
   text-align: center;
   height: 60px;
+  bottom: 0px;
+  left: 0;
+  right: 0;
 }
 
 footer a {
@@ -172,6 +193,22 @@ footer a:hover {
   background-color: var(--dark-orange);
 }
 
+.section {
+  padding-top: 100px;
+  height: 100%;
+  margin-bottom: -60px;
+  background-color: var(--light-orange)
+}
+
+.section a {
+  color: var(--dark-blue);
+  font-weight: bold;
+}
+
+.help-text {
+  font-size: 0.7em;
+}
+
 /* ############################# MEDIA QUERIES ############################# */
 @media only screen and (max-width:991.98px) {
   .nav-txt {
@@ -185,5 +222,9 @@ footer a:hover {
 
   .fas {
     margin-right: 5px;
+  }
+
+  .help-text {
+    display: none;
   }
 }

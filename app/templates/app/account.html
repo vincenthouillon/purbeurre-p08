@@ -1,0 +1,24 @@
+{% extends 'app/base.html' %}
+
+{% block head_title %}Mon compte{% endblock %}
+
+{% block content %}
+<div class="section">
+    <div class="banner">
+        <div class="text-center text-banner">
+            <h2>Ahoy</h2>
+            <h3>{{ user.username }} !</h3>
+        </div>
+    </div>
+        <div class="container">
+            <div class="text-center">
+                <h4>{{ user.email }}</h4>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. At facilis consectetur debitis ea mollitia,
+                    nesciunt,
+                    molestias, autem non perferendis quis ex voluptas. Quis odio, impedit id quae consectetur tenetur
+                    fugiat?
+                </p>
+            </div>
+        </div>
+</div>
+{% endblock content %}

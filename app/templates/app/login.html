@@ -1,0 +1,23 @@
+{% extends 'app/base.html' %}
+
+{% block head_title %}S'identifier{% endblock %}
+
+{% block content %}
+<div class="section">
+    <div class="container">
+        <form id="login_form" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-dark" type="submit">S'identifier</button>
+        </form>
+    </div>
+    <div class="container">
+        <br>
+        <p>Pas encore enregisté(e) ? <a href="{% url 'app:signup' %}">
+                Inscrivez-vous ! </a> Vous pourrez enregistrer vos aliments 
+                préférés dans votre espace personnel et gagner du temps lors de
+                 la prochaine recherche.</p>
+    </div>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends 'app/base.html' %}
+
+{% block head_title %}Mentions légales{% endblock %}
+
+{% block content %}
+<div class="section">
+    <div class="container">
+        <p align="center"> Site internet hébergé par <a href="https://www.heroku.com/"
+                title="Heroku website" target=_blank>Heroku</a><br>
+            Siège social: The Landmark @ 1 Market St <br>
+            Suite 300 <br>
+            San Francisco, CA 94105 <br>
+        </p>
+
+        <hr>
+
+        <p align="center">
+            Images de fond: credit by Olenka Kotyk, plateforme <a href="https://unsplash.com/"
+                title="Unsplash website" target=_blank>Unsplash</a> <br>
+            Icône carotte: credit by Fabien Jouin, <a href="https://thenounproject.com/term/carrot/29691/"
+                title="The Noun Project website" target=_blank>'The Noun Project'</a> <br>
+        </p>
+
+        <hr>
+
+        <p align="center">&copy{% now "Y" %}<a href="https://github.com/vincenthouillon" 
+            title="Vincent Houillon GitHub profile" target=_blank>
+                    Vincent Houillon </a> pour la startup <strong><i>Pur
+                    Beurre<sup>&reg</sup></strong></i><br></p>
+    </div>
+
+</div>
+
+
+{% endblock content %}

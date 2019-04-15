@@ -1,0 +1,33 @@
+{% extends 'app/base.html' %}
+
+{% block head_title %}S'enregister{% endblock %}
+
+{% block content %}
+<div class="section">
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="row">
+                <div class="col-10 m-1">
+                    {{ field.label_tag }} {{ field }}
+                    <span class="help-text">{{ field.help_text }}</span>
+                </div>
+                <div class="mx-auto text-center">
+                    {% for error in field.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+
+            <button class="btn btn-dark" type="submit">S'enregister</button>
+            <div class="sign-in">
+                <br>
+                <p>Déjà enregisté(e) ? <a href="{% url 'app:login' %}">
+                        Accédez</a> à votre espace personnel !</p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

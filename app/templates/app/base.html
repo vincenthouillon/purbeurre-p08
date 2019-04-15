@@ -39,74 +39,16 @@
     {% endfor %}
     {% endif %}
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-        <div class="container">
-            <!-- Condition to keep the scroll-js function on the home page -->
-            {% if request.path == '/' %}
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                <img id="logo" src="{% static 'app/img/logo_pur_beurre.png' %}" alt="logo pur beurre">
-                Pur Beurre</a>
-            {% else %}
-            <a class="navbar-brand js-scroll-trigger" href="{% url 'app:home' %}">
-                <img id="logo" src="{% static 'app/img/logo_pur_beurre.png' %}" alt="logo pur beurre">
-                Pur Beurre</a>
-            {% endif %}
+    {% include 'app/navbar.html' %}
 
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                    <li class="nav-item">
-                        <form action="POST">
-                            <input id="nav-search" type="text" placeholder="Chercher">
-                        </form>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" title="Mon compte" href="{% url 'users:register' %}"><i
-                                class="fas fa-user"></i>
-                            <span class="nav-txt">Mon compte</span>
-                        </a>
-
-                    </li>
-
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" title="Mes aliments" href="#">
-                            <!-- <svg>
-                                <use xlink:href="img/carot.svg#carot-icon">
-                            </svg> -->
-                            <i class="fas fa-carrot"></i>
-                            <span class="nav-txt">Mes aliments</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" title="Déconnexion" href="#logout"><i class="fas fa-sign-out-alt"></i>
-                            <span class="nav-txt">Mon compte</span>
-
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-
-
-
-    {% block content %}{% endblock %}
+    {% block content %}{% endblock content%}
 
     <!-- Footer -->
     <footer>
         <div class="container">
             <!-- <div class="small text-center">Mentions légales &copy; 2019 - Start Bootstrap</div> -->
             <div class="row">
-                <a class="col-6" href="#">Mentions légales</a>
+                <a class="col-6" href="{% url 'app:mentions' %}">Mentions légales</a>
                 <a class="col-6" href="#contact">Contact</a>
             </div>
         </div>
