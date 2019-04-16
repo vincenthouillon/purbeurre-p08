@@ -5,31 +5,33 @@
 {% block content %}
 <div class="section">
     <div class="container">
-        <p align="center"> Site internet hébergé par <a href="https://www.heroku.com/"
-                title="Heroku website" target=_blank>Heroku</a><br>
-            Siège social: The Landmark @ 1 Market St <br>
-            Suite 300 <br>
-            San Francisco, CA 94105 <br>
-        </p>
-
-        <hr>
-
+        <h1 align="center">Mentions légales</h1>
+        <br>
         <p align="center">
-            Images de fond: credit by Olenka Kotyk, plateforme <a href="https://unsplash.com/"
-                title="Unsplash website" target=_blank>Unsplash</a> <br>
-            Icône carotte: credit by Fabien Jouin, <a href="https://thenounproject.com/term/carrot/29691/"
-                title="The Noun Project website" target=_blank>'The Noun Project'</a> <br>
+            Site internet hébergé par <a href="https://www.heroku.com/" title="Heroku website" target=_blank> &middot;
+                <img class="legal-img" src="https://www.herokucdn.com/favicon.ico" alt="Logo Heroku"> Heroku</a><br>
         </p>
-
         <hr>
-
-        <p align="center">&copy{% now "Y" %}<a href="https://github.com/vincenthouillon" 
-            title="Vincent Houillon GitHub profile" target=_blank>
-                    Vincent Houillon </a> pour la startup <strong><i>Pur
+        <p align="center">
+            Images de fond: Olenka Kotyk, sur le site <a href="https://unsplash.com/" title="Unsplash website"
+                target=_blank> &middot; <img class="legal-img" src="https://unsplash.com/apple-touch-icon.png"
+                    alt="Logo Unsplash"> Unsplash</a> <br>
+        </p>
+        <p align="center">
+            Icône carotte: Fabien Jouin, DE <a href="https://thenounproject.com/term/carrot/29691/"
+                title="The Noun Project website" target=_blank> &middot;
+                <img class="legal-img"
+                    src="https://static.production.thenounproject.com/img/favicons/apple-touch-icon.7fb1143e988e.png"
+                    alt="Logo thenounproject"> The Noun Project</a> <br>
+        </p>
+        <hr>
+        <p align="center">&copy{% now "Y" %}<a href="https://github.com/vincenthouillon"
+                title="Vincent Houillon GitHub profile" target=_blank>
+                Vincent Houillon <img class="legal-img" src="https://github.com/fluidicon.png" alt="Logo Github"></a>
+            pour la startup <strong><i>Pur
                     Beurre<sup>&reg</sup></strong></i><br></p>
     </div>
 
 </div>
-
 
 {% endblock content %}

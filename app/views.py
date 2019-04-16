@@ -4,6 +4,10 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import SignupForm
 
+# Banner's images
+IMG = '/static/app/img/bg-masthead.jpg'
+IMG2 = '/static/app/img/bg-masthead-2.jpg'
+
 
 def home_page(request):
     template_name = 'app/home.html'
@@ -37,6 +41,7 @@ def account_page(request):
     template_name = 'app/account.html'
     context = {
         'user': request.user,
+        'img': IMG2
     }
     return render(request, template_name, context)
 

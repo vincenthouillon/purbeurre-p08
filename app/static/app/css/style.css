@@ -74,6 +74,17 @@ svg {
   margin-right: 10px;
 }
 
+header.masthead {
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 72px);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(92, 77, 66, 0.8)), to(rgba(92, 77, 66, 0.8))), url("../img/bg-masthead.jpg");
+  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../img/bg-masthead.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
 .masthead h1,
 .masthead h2 {
   font-family: "Open sans", sans-serif;
@@ -137,11 +148,10 @@ svg {
 .banner{
   height: 160px;
   color: #ffffff;
-  text-shadow: 1px 1px 10px black;
+  text-shadow: 1px 1px 10px var(--light-orange);
   margin-top: -28px;
   margin-bottom: 20px;
   background-color: #345a61;
-  background-image: url('../img/bg-masthead-2.jpg');
   background-size: cover;
   letter-spacing: 2px;
 }
@@ -207,6 +217,10 @@ footer a:hover {
 
 .help-text {
   font-size: 0.7em;
+}
+
+.legal-img {
+  width: 25px;
 }
 
 /* ############################# MEDIA QUERIES ############################# */
