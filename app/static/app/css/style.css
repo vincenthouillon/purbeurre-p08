@@ -205,7 +205,8 @@ footer a:hover {
 
 .section {
   padding-top: 100px;
-  height: 100%;
+  min-height: 100%;
+  padding-bottom: 60px;
   margin-bottom: -60px;
   background-color: var(--light-orange)
 }
@@ -221,6 +222,10 @@ footer a:hover {
 
 .legal-img {
   width: 25px;
+}
+
+.logout-img {
+  width: 420px;
 }
 
 /* ############################# MEDIA QUERIES ############################# */

@@ -5,33 +5,40 @@
 {% block content %}
 <div class="section">
     <div class="container">
-        <h1 align="center">Mentions légales</h1>
-        <br>
-        <p align="center">
-            Site internet hébergé par <a href="https://www.heroku.com/" title="Heroku website" target=_blank> &middot;
-                <img class="legal-img" src="https://www.herokucdn.com/favicon.ico" alt="Logo Heroku"> Heroku</a><br>
-        </p>
-        <hr>
-        <p align="center">
-            Images de fond: Olenka Kotyk, sur le site <a href="https://unsplash.com/" title="Unsplash website"
-                target=_blank> &middot; <img class="legal-img" src="https://unsplash.com/apple-touch-icon.png"
-                    alt="Logo Unsplash"> Unsplash</a> <br>
-        </p>
-        <p align="center">
-            Icône carotte: Fabien Jouin, DE <a href="https://thenounproject.com/term/carrot/29691/"
-                title="The Noun Project website" target=_blank> &middot;
-                <img class="legal-img"
-                    src="https://static.production.thenounproject.com/img/favicons/apple-touch-icon.7fb1143e988e.png"
-                    alt="Logo thenounproject"> The Noun Project</a> <br>
-        </p>
-        <hr>
-        <p align="center">&copy{% now "Y" %}<a href="https://github.com/vincenthouillon"
-                title="Vincent Houillon GitHub profile" target=_blank>
-                Vincent Houillon <img class="legal-img" src="https://github.com/fluidicon.png" alt="Logo Github"></a>
-            pour la startup <strong><i>Pur
-                    Beurre<sup>&reg</sup></strong></i><br></p>
+        <div class="text-center">
+            <h2>Mentions légales</h2>
+            <br>
+            <p>
+                Site internet hébergé par <a href="https://www.heroku.com/" title="Heroku website" target=_blank>
+                    <img class="legal-img" src="https://www.herokucdn.com/favicon.ico" alt="Logo Heroku"> Heroku</a><br>
+            </p>
+            <hr>
+            <p>
+                Template : Creative de Blackrock Digital LLC &middot; <a
+                    href="https://startbootstrap.com/themes/creative/" title="startboostrap website" target=_blank><img
+                        class="legal-img" src="https://startbootstrap.com/assets/img/icons/apple-touch-icon.png"
+                        alt="Logo startboostrap">
+                    StartBoostrap</a> <br>
+            </p>
+            <p>
+                Images de fond : Olenka Kotyk &middot; <a href="https://unsplash.com/" title="Unsplash website"
+                    target=_blank><img class="legal-img" src="https://unsplash.com/apple-touch-icon.png"
+                        alt="Logo Unsplash"> Unsplash</a> <br>
+            </p>
+            <p>
+                Icône carotte : Fabien Jouin, DE &middot; <a href="https://thenounproject.com/term/carrot/29691/"
+                    title="The Noun Project website" target=_blank>
+                    <img class="legal-img"
+                        src="https://static.production.thenounproject.com/img/favicons/apple-touch-icon.7fb1143e988e.png"
+                        alt="Logo thenounproject"> The Noun Project</a> <br>
+            </p>
+            <hr>
+            <p>&copy{% now "Y" %}<a href="https://github.com/vincenthouillon" title="Vincent Houillon GitHub profile"
+                    target=_blank>
+                    Vincent Houillon</a>
+                pour la startup <strong><i>Pur
+                        Beurre<sup>&reg</sup></strong></i><br></p>
+        </div>
     </div>
-
 </div>
-
 {% endblock content %}

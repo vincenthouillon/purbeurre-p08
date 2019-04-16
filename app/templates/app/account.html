@@ -11,15 +11,22 @@
             <h3>{{ user.username }} !</h3>
         </div>
     </div>
-        <div class="container">
-            <div class="text-center">
-                <h4>{{ user.email }}</h4>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. At facilis consectetur debitis ea mollitia,
-                    nesciunt,
-                    molestias, autem non perferendis quis ex voluptas. Quis odio, impedit id quae consectetur tenetur
-                    fugiat?
-                </p>
+
+    <div class="container">
+        <div class="text-center">
+            <div class="row">
+                <div class="col-md-6 col-sm-10 mx-auto">
+                    <div class="shadow p-3 mb-5 bg-white rounded font-weight-bold">{{ user.email }}</div>
+                </div>
+            </div>
+            <p><b>Nom :</b> {{ user.last_name }}<br>
+                <b>Prénom :</b> {{ user.first_name }}</p>
+            <hr>
+            <div class="text-muted small">
+                <p>Date d'inscription : <b>{{ user.date_joined|date:'d F Y' }}</b><br>
+                    Dernière connexion : <b>{{ user.last_login|date:'l d F Y' }}</b></p>
             </div>
         </div>
+    </div>
 </div>
 {% endblock content %}
