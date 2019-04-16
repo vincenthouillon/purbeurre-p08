@@ -31,18 +31,21 @@ def signup_page(request):
 
     return render(request, template_name, context)
 
+
 @login_required
 def account_page(request):
-    template_name='app/account.html'
+    template_name = 'app/account.html'
     context = {
         'user': request.user,
     }
     return render(request, template_name, context)
 
+
 def legal_page(request):
-    template_name='app/legal.html'
+    template_name = 'app/legal.html'
     return render(request, template_name)
 
+
 def contact_page(request):
-    template_name='app/contact.html'
+    template_name = 'app/contact.html'
     return render(request, template_name)

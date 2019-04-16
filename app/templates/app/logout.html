@@ -1,0 +1,20 @@
+{% extends 'app/layouts/base.html' %}
+{% load static %}
+
+{% block head_title %}Deconnexion{% endblock %}
+
+{% block content %}
+
+<div class="section">
+    <div class="container">
+        <h1>Vous êtes déconnecté avec succès...</h1>
+        <p>Merci de votre viste, à très bientôt !</p>
+        <p><img src="{% static 'app/img/remy-10.jpg' %}" alt="image Remy"></p>
+        <br>
+        <a href="{% url 'app:home' %}">Revenir à l'accueil</a>
+        <br>
+        <a href="{% url 'app:login' %}">Se reconnecter</a>
+    </div>
+</div>
+
+{% endblock content %}
