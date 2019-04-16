@@ -18,6 +18,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path('django_admin/', admin.site.urls),
-    # path('register/', user_views.register, name='register'),
     path('', include('app.urls', namespace='app')),
 ]
