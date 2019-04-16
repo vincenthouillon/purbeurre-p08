@@ -1,4 +1,4 @@
-{% extends 'app/base.html' %}{% load static %}
+{% extends 'app/layouts/base.html' %}{% load static %}
 
 {% block head_title %}Acceuil{% endblock %}
 
@@ -63,25 +63,6 @@
 
 <!-- Contact Section -->
 <section class="page-section" id="contact">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h2 class="mt-0">Contactez-nous !</h2>
-                <hr class="divider my-4">
-                <p class="mb-5">Nous vous répondrons dans les plus brefs délais.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 ml-auto text-center">
-                <i class="fas fa-phone fa-3x mb-3"></i>
-                <p>+1 (202) 555-0149</p>
-            </div>
-            <div class="col-lg-4 mr-auto text-center">
-                <i class="fas fa-envelope fa-3x mb-3"></i>
-                <!-- Make sure to change the email address in anchor text AND the link below! -->
-                <a class="d-block" href="mailto:contact@yourwebsite.com">contact@yourwebsite.com</a>
-            </div>
-        </div>
-    </div>
+    {% include 'app/layouts/contact.html' %}
 </section>
 {% endblock content %}

@@ -12,5 +12,6 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='app/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='app/home.html'), name='logout'),
     path('account/', views.account_page, name='account'),
-    path('mentions', views.mentions_page, name='mentions')
+    path('legal', views.legal_page, name='legal'),
+    path('contact', views.contact_page, name='contact'),
 ]

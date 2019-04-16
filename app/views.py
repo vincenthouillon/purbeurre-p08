@@ -39,6 +39,10 @@ def account_page(request):
     }
     return render(request, template_name, context)
 
-def mentions_page(request):
-    template_name='app/mentions.html'
+def legal_page(request):
+    template_name='app/legal.html'
+    return render(request, template_name)
+
+def contact_page(request):
+    template_name='app/contact.html'
     return render(request, template_name)
