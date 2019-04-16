@@ -8,7 +8,7 @@
 
 The startup Pur Beurre, with which you have already worked, wants to develop a web platform for its customers. This site will allow anyone to find a healthy substitute for a food considered "Too fat, too sweet, too salty" (although we all know that fat is life).
 
-![Screenshot](mainpage/static/mainpage/img/screenshot.png)
+![Screenshot](app/static/app/img/screenshot.png)
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
