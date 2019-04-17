@@ -13,6 +13,7 @@ class Categorie(models.Model):
 
     class Meta:
         verbose_name = 'catégorie'
+        ordering = ['category_name']
 
 
 class Nutriscore(models.Model):
@@ -26,6 +27,7 @@ class Nutriscore(models.Model):
 
     class Meta:
         verbose_name = 'nutriscore'
+        ordering = ['nutrition_grades']
 
 
 class Product(models.Model):
@@ -55,3 +57,4 @@ class Product(models.Model):
 
     class Meta:
         verbose_name = 'produit'
+        ordering = ['product_name']

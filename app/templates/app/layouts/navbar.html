@@ -22,8 +22,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto my-2 my-lg-0">
                     <li class="nav-item">
-                        <form action="POST">
-                            <input id="nav-search" type="text" placeholder="Chercher">
+                        <form method="GET" action="{% url 'app:search' %}">
+                            <input id="nav-search" type="text" name="query" placeholder="Chercher">
                         </form>
                     </li>
 

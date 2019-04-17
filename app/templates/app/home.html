@@ -14,9 +14,9 @@
             <div class="col-lg-8 align-self-baseline">
                 <h2 class="text-white-75 font-weight-light mb-5">
                     Trouvé un produit de substitution pour ceux que vous consommez tous les jours.</h2>
-                <form class="form-inline" id="search" action="">
+                <form class="form-inline" id="search" method="GET" action="{% url 'app:search' %}">
                     <div class="form-group form-control-lg col-12">
-                        <input class="col-lg-8 col-sm-12" id="search-txt" type="text" placeholder="Produit">
+                        <input class="col-lg-8 col-sm-12" id="search-txt" type="text" name="query" placeholder="Produit">
                         <button class="col-lg-3 col-xs-12" id="search-btn">Chercher</button>
                     </div>
                 </form>

@@ -1,0 +1,23 @@
+{% extends 'app/layouts/base.html' %}
+{% load static %}
+
+{% block head_title %}Résultats de recherche {% endblock %}
+
+{% block content %}
+<div class="section">
+    <div class="banner" style="background-image: url('{{ img }}')">
+        <div class="text-center text-banner">
+            <h2>{{ query }}</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-8 mx-auto">
+                <h2>Vous pouvez remplacer cet aliment par :</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

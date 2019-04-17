@@ -54,3 +54,14 @@ def legal_page(request):
 def contact_page(request):
     template_name = 'app/contact.html'
     return render(request, template_name)
+
+
+def search_page(request):
+
+    query = request.GET.get('query')
+    template_name = 'app/search.html'
+    context = {
+        'img': IMG,
+        'query': query
+    }
+    return render(request, template_name, context)
