@@ -101,7 +101,7 @@ header.masthead {
 #search-btn {
   border: 1px solid var(--dark-orange);
   background-color: var(--dark-orange);
-  color: white;
+  color: #ffffff;
   height: 40px;
 }
 
@@ -151,7 +151,7 @@ header.masthead {
   text-shadow: 1px 1px 10px var(--light-orange);
   margin-top: -28px;
   margin-bottom: 20px;
-  background-color: #345a61;
+  background-color: #000000;
   background-size: cover;
   letter-spacing: 2px;
 }
@@ -195,7 +195,7 @@ footer a:hover {
   background-color: var(--dark-blue);
   border: none;
   padding: 5px 20px;
-  color: white;
+  color: #ffffff;
   font-weight: bold;
 }
 
