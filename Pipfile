@@ -12,6 +12,7 @@ pylint = "*"
 django = "*"
 django-heroku = "*"
 psycopg2 = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"

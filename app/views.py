@@ -57,8 +57,8 @@ def contact_page(request):
 
 
 def search_page(request):
-
     query = request.GET.get('query')
+    
     template_name = 'app/search.html'
     context = {
         'img': IMG,

@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import Categorie, Product, Nutriscore
+from .models import Product, ProductAdmin
 
 # Register your models here.
-admin.site.register(Categorie)
-admin.site.register(Product)
-admin.site.register(Nutriscore)
+admin.site.register(Product, ProductAdmin)
