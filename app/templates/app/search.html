@@ -6,8 +6,9 @@
 {% block content %}
 <div class="section">
     <div class="banner" style="background-image: url('{{ img }}')">
-        <div class="text-center text-banner">
+        <div class="text-center">
             <h2>{{ query }}</h2>
+            <h3>{{ first_product }}</h3>
         </div>
     </div>
 
@@ -15,6 +16,9 @@
         <div class="row text-center">
             <div class="col-8 mx-auto">
                 <h2>Vous pouvez remplacer cet aliment par :</h2>
+                {% for product in products %}
+                    {{ product.code }} : {{ product.product_name }} - {{ product.title }} - {{ product.brands }} - {{ product.quantity }}<br>
+                {% endfor %}
             </div>
         </div>
     </div>

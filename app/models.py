@@ -3,7 +3,6 @@ from django.db import models
 from django.contrib import admin
 
 
-
 class Product(models.Model):
     """Food details retrieved from OpenFoodFacts and saved by the user
     """

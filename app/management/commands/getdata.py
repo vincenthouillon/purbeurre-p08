@@ -48,8 +48,8 @@ class Command(BaseCommand):
                     self._insert_data(products_data)
 
         # Gives infos about updating process
-        self.stdout.write("Finish...", ending='\n')
-
+        self.stdout.write(f"Finish, the database contains {Product.objects.count()} products", ending='\n')
+        
     def _insert_data(self, products_data):
         """Insert data in database."""
         idx = 0

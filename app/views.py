@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, login
-from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
 
 from .forms import SignupForm
+from .models import Product
 
 # Banner's images
 IMG = '/static/app/img/bg-masthead.jpg'
@@ -58,10 +59,33 @@ def contact_page(request):
 
 def search_page(request):
     query = request.GET.get('query')
+
+    qs = Product.objects.filter(product_name__icontains=query)  # option
+
+    title = f"Résultat pour : {query}"
+    first_product = Product.objects.filter(
+        product_name__icontains=query).first()
     
+    products_list = Product.objects.filter(
+        category=first_product.category)
+    products_list = Product.objects.filter(
+        category=first_product.nutrition_grades)
+    products_list = products_list.order_by('nutrition_grades')
+
+    print('#'*20, qs)
+    print('#'*10, title)
+    print('#'*5, products_list)
+
+
     template_name = 'app/search.html'
     context = {
         'img': IMG,
-        'query': query
+        'query': title,
+        'first_product': first_product,
+        'products': products_list,
+        # 'category': Product.category,
+        # 'brands': Product.brands,
+        # 'quantity': Product.quantity,
+        # 'image_url': Product.image_url
     }
     return render(request, template_name, context)
