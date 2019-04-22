@@ -146,18 +146,23 @@ header.masthead {
 }
 
 .banner{
-  height: 160px;
+  height: 200px;
   color: #ffffff;
-  text-shadow: 1px 1px 10px var(--light-orange);
-  margin-top: -28px;
+  text-shadow: 1px 1px 5px var(--light-orange);
+  background-color: #00000080;
+  margin-top: -100px;
   margin-bottom: 20px;
-  background-color: #000000;
-  background-size: cover;
   letter-spacing: 2px;
 }
 
+.banner-image {
+  background-size: auto;
+  background-position: center; 
+  height: 100%;
+}
+
 .banner h2 {
-  padding-top: 35px;
+  padding-top: 85px;
 }
 
 footer {
@@ -227,6 +232,8 @@ footer a:hover {
 .logout-img {
   width: 420px;
 }
+
+
 
 /* ############################# MEDIA QUERIES ############################# */
 @media only screen and (max-width:991.98px) {

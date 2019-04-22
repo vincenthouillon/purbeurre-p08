@@ -13,7 +13,8 @@ class Product(models.Model):
         max_length=40, null=True, verbose_name='quantité')
     code = models.CharField(max_length=40, unique=True,
                             verbose_name='code barre')
-    url = models.URLField(verbose_name="lien vers le site OFF", help_text="OFF = Open Food Facts")
+    url = models.URLField(verbose_name="lien vers le site OFF",
+                          help_text="OFF = Open Food Facts")
     image_url = models.URLField(
         null=True, verbose_name="lien vers l'image")
     fat = models.DecimalField(max_digits=5, decimal_places=2,
@@ -35,6 +36,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'produit'
         ordering = ['product_name']
+
 
 class ProductAdmin(admin.ModelAdmin):
     search_fields = ['product_name']
