@@ -156,39 +156,44 @@ def detail_page(request, code_product):
     product = get_object_or_404(Product, code=code_product)
 
     URL = "https://static.openfoodfacts.org/images/misc/"
-    
+
+    # For drinks, nutritional benchmarks are divided by 2.
+    if product.category == "Boissons":
+        coef = 0.5
+    else:
+        coef = 1
+
     # Traffic lights - fat
-    if product.fat < 3:
+    if product.fat < 3 * coef:
         fat_landmark = URL + "low_30.png"
-    elif 3 <= product.fat < 20:
+    elif 3 * coef <= product.fat < 20 * coef:
         fat_landmark = URL + "moderate_30.png"
     else:
         fat_landmark = URL + "high_30.png"
 
     # Traffic lights - saturated_fat
-    if product.saturated_fat < 1.5:
+    if product.saturated_fat < 1.5 * coef:
         saturated_fat_landmark = URL + "low_30.png"
-    elif 1.5 <= product.saturated_fat < 5:
+    elif 1.5 * coef <= product.saturated_fat < 5 * coef:
         saturated_fat_landmark = URL + "moderate_30.png"
     else:
         saturated_fat_landmark = URL + "high_30.png"
 
     # Traffic lights - sugars
-    if product.sugars < 5:
+    if product.sugars < 5 * coef:
         sugars_landmark = URL + "low_30.png"
-    elif 5 <= product.sugars < 12.5:
+    elif 5 * coef <= product.sugars < 12.5 * coef:
         sugars_landmark = URL + "moderate_30.png"
     else:
         sugars_landmark = URL + "high_30.png"
 
     # Traffic lights - salt
-    if product.salt < 0.3:
+    if product.salt < 0.3 * coef:
         salt_landmark = URL + "low_30.png"
-    elif 0.3 <= product.salt < 1.5:
+    elif 0.3 * coef <= product.salt < 1.5 * coef:
         salt_landmark = URL + "moderate_30.png"
     else:
         salt_landmark = URL + "high_30.png"
-
 
     template_name = 'app/detail.html'
     context = {
