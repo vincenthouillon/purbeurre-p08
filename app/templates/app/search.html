@@ -8,27 +8,49 @@
     <div class="banner-image" style="background-image: url('{{ requested_product_image }}')">
         <div class="banner">
             <div class="text-center">
-                <h2>{{ requested_product_name }} - {{ requested_product_brands }} - {{ requested_product_quantity }}
-                </h2>
+                <h2>{{ requested_product_name }}</h2>
+                <h3>
+                    <small>
+                        {{ requested_product_brands }} - {{ requested_product_quantity }}
+                    </small>
+                </h3>
                 <p><small> {{ requested_title }}</small></p>
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <h2>Vous pouvez remplacer cet aliment par :</h2>
-        <div class="row mb-4">
-            <div class="col-4 mx-auto item">
+    <div class="container-fluid">
+        <h2 class="title-substitute text-center">Vous pouvez remplacer cet aliment par :</h2>
+        <div class="row mb-4 mx-auto justify-content-center">
             {% for product in products %}
-                <div class="card m-2">
-                    <img src=" {{ product.image_url }} " alt="photo produit">
-                    {{ product.product_name }} - {{ product.title }} - {{ product.brands }} -
-                    {{ product.quantity }}
+            <div class="cards-product col-lg-3 col-sm-12 m-3">
+                <div class="row">
+                    {% if product.nutrition_grades == 'a' %}
+                        <span class="nutriscore-a">{{ product.nutrition_grades }}</span>
+                    {% elif product.nutrition_grades == 'b' %}
+                        <span class="nutriscore-b">{{ product.nutrition_grades }}</span>
+                    {% endif %}
+                    <div class="container-img">
+                        <a href=" {% url 'app:detail' code_product=product.code %} ">
+                            <img class="cards-product-img" src=" {{ product.image_url }} " alt="photo produit">
+                    </div>
+                    </a>
+                    <p><b>{{ product.product_name|truncatechars:40 }}</b>
+                        <p>
+                            <small>
+                                {{ product.brands }} - {{ product.quantity }}</p>
+                        </small>
+                        </p>
+
+                    <span class="link-product-detail">
+                        <a href="#">
+                            <i class="far fa-save"></i>
+                            Sauvegarder</a>
+                    </span>
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>
-
 {% endblock content %}

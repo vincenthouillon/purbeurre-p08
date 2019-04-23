@@ -1,0 +1,58 @@
+{% extends 'app/layouts/base.html' %}
+
+{% load static %}
+
+{% block head_title %}Détail produit{% endblock %}
+
+{% block content %}
+
+<div class="section">
+    <div class="banner-image" style="background-image: url('{{ product_img }}')">
+        <div class="banner">
+            <div class="text-center">
+                <h2>{{ product_name }}</h2>
+                <h3>
+                    <small>
+                        {{ product_brands }} - {{ product_quantity }}
+                    </small>
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mb-4">
+
+            <div class="col-lg-6">
+                <img src="https://static.openfoodfacts.org/images/misc/nutriscore-{{ product_nutriscore }}.svg"
+                    alt="Nutriscore">
+            </div>
+            <div class="col-lg-6">
+                <h4>Repères nutritionnels pour 100g</h4>
+                <ul>
+                    <li><img src="{{ fat_landmark }}" alt="fat landmark">
+                        {{ product_fat }} Matières grasses / Lipides
+                    </li>
+                    <li><img src="{{ saturated_fat_landmark }}" alt="saturated fat landmark">
+                        {{ product_saturated_fat }} Acides gras saturés
+                    </li>
+                    <li><img src="{{ sugars_landmark }}" alt="sugars landmark">
+                         {{ product_sugars }} Sucres
+                    </li>
+                    <li><img src="{{ salt_landmark }}" alt="salt landmark">
+                         {{ product_salt }} Sel
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-6 mx-auto">
+                <div class="shadow p-3 mb-5 bg-white rounded font-weight-bold">
+                    <a href="{{ product_url }}" target=_blank>Voir la fiche d'Open Food Facts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

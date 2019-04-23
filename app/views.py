@@ -1,11 +1,9 @@
-import os
-
 import requests
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector
 from django.http import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import SignupForm
 from .models import Product
@@ -16,12 +14,15 @@ IMG2 = '/static/app/img/bg-masthead-2.jpg'
 
 
 def home_page(request):
+    """Display home page."""
+
     template_name = 'app/home.html'
     return render(request, template_name)
 
 
 def signup_page(request):
-    """User login page"""
+    """User login page."""
+
     form = SignupForm(request.POST)
     if form.is_valid():
         form.save()
@@ -44,6 +45,8 @@ def signup_page(request):
 
 @login_required
 def account_page(request):
+    """Displays the user account page."""
+
     template_name = 'app/account.html'
     context = {
         'user': request.user,
@@ -63,8 +66,9 @@ def contact_page(request):
 
 
 def search_page(request):
+    """Page with search results."""
 
-    def articles_filter(name):
+    def _articles_filter(name):
         """Delete articles in product names
 
         Arguments:
@@ -108,36 +112,25 @@ def search_page(request):
     try:
         substitution_products = Product.objects.annotate(
             search=SearchVector('product_name'),).filter(
-                search=articles_filter(query))
-        substitution_products = substitution_products.order_by('nutrition_grades')
-        
+                search=_articles_filter(query))
+        substitution_products = substitution_products.order_by(
+            'nutrition_grades')
+
         if not substitution_products:
             substitution_products = Product.objects.annotate(
                 search=SearchVector('product_name'),).filter(
-                    search=articles_filter(requested_product['products'][0]['product_name']))
-            substitution_products = substitution_products.order_by('nutrition_grades')
-        
+                    search=_articles_filter(requested_product['products'][0]['product_name']))
+            substitution_products = substitution_products.order_by(
+                'nutrition_grades')
+
         if not substitution_products:
             substitution_products = Product.objects.annotate(
                 search=SearchVector('product_name'),).filter(
-                    search=articles_filter(requested_product['products'][0]['generic_name_fr']))
-            substitution_products = substitution_products.order_by('nutrition_grades')
+                    search=_articles_filter(requested_product['products'][0]['generic_name_fr']))
+            substitution_products = substitution_products.order_by(
+                'nutrition_grades')
     except:
         raise Http404
-
-    # qs = Product.objects.filter(product_name__icontains=query)  # option
-
-    # first_product = Product.objects.filter(
-    #     product_name__icontains=query).first()
-
-    # products_list = Product.objects.filter(
-    #     category=first_product.category)
-    # products_list = Product.objects.filter(
-    #     category=first_product.nutrition_grades)
-    # products_list = products_list.order_by('nutrition_grades')
-
-    # print('#'*20, qs)
-    # print('#'*5, products_list)
 
     template_name = 'app/search.html'
     context = {
@@ -148,22 +141,71 @@ def search_page(request):
         'requested_product_quantity': requested_product['products'][0]['quantity'],
         'requested_product_image': requested_product['products'][0]['image_url'],
         'products': substitution_products,
-        # 'category': Product.category,
-        # 'brands': Product.brands,
-        # 'quantity': Product.quantity,
-        # 'image_url': Product.image_url
     }
 
-    # * IMPORTANT [22 Avril 2019]: For debug
-    os.system('cls')
-    print('#'*80)
-    print(requested_product['products'][0]['generic_name_fr'])
-    print(articles_filter(requested_product['products'][0]['generic_name_fr']))
-    print(requested_product['products'][0]['product_name'])
-    print(
-        f"Nutriscore: {requested_product['products'][0]['nutrition_grades']}")
-    print(substitution_products)
-    print(type(substitution_products))
-    print('#'*80)
+    return render(request, template_name, context)
 
+
+def detail_page(request, code_product):
+    """Page with product detail.
+
+    Arguments:
+        code_product {str} -- Code product
+    """
+
+    product = get_object_or_404(Product, code=code_product)
+
+    URL = "https://static.openfoodfacts.org/images/misc/"
+    
+    # Traffic lights - fat
+    if product.fat < 3:
+        fat_landmark = URL + "low_30.png"
+    elif 3 <= product.fat < 20:
+        fat_landmark = URL + "moderate_30.png"
+    else:
+        fat_landmark = URL + "high_30.png"
+
+    # Traffic lights - saturated_fat
+    if product.saturated_fat < 1.5:
+        saturated_fat_landmark = URL + "low_30.png"
+    elif 1.5 <= product.saturated_fat < 5:
+        saturated_fat_landmark = URL + "moderate_30.png"
+    else:
+        saturated_fat_landmark = URL + "high_30.png"
+
+    # Traffic lights - sugars
+    if product.sugars < 5:
+        sugars_landmark = URL + "low_30.png"
+    elif 5 <= product.sugars < 12.5:
+        sugars_landmark = URL + "moderate_30.png"
+    else:
+        sugars_landmark = URL + "high_30.png"
+
+    # Traffic lights - salt
+    if product.salt < 0.3:
+        salt_landmark = URL + "low_30.png"
+    elif 0.3 <= product.salt < 1.5:
+        salt_landmark = URL + "moderate_30.png"
+    else:
+        salt_landmark = URL + "high_30.png"
+
+
+    template_name = 'app/detail.html'
+    context = {
+        'code_product': code_product,
+        'product_name': product.product_name,
+        'product_img': product.image_url,
+        'product_brands': product.brands,
+        'product_quantity': product.quantity,
+        'product_nutriscore': product.nutrition_grades,
+        'fat_landmark': fat_landmark,
+        'product_fat': product.fat,
+        'saturated_fat_landmark': saturated_fat_landmark,
+        'product_saturated_fat': product.saturated_fat,
+        'sugars_landmark': sugars_landmark,
+        'product_sugars': product.sugars,
+        'salt_landmark': salt_landmark,
+        'product_salt': product.salt,
+        'product_url': product.url
+    }
     return render(request, template_name, context)

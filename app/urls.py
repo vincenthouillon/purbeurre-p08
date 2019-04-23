@@ -15,4 +15,5 @@ urlpatterns = [
     path('legal', views.legal_page, name='legal'),
     path('contact', views.contact_page, name='contact'),
     path('search', views.search_page, name='search'),
+    path('<code_product>', views.detail_page, name='detail'),
 ]
