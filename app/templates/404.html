@@ -1,0 +1,18 @@
+{% extends 'app/layouts/base.html' %}
+{% load static %}
+
+{% block head_title %}Erreur 404{% endblock %}
+
+{% block content %}
+
+<div class="section">
+    <div class="container">
+        <h1>Erreur 404 - Page non trouvée !</h1>
+        <p><img src="{% static 'app/img/remy-5.jpg' %}" alt="Remy" width="600px"></p>
+        <br>
+        <a href="{% url 'app:home' %}">Revenir à l'accueil</a>
+        <br>
+    </div>
+</div>
+
+{% endblock content %}
