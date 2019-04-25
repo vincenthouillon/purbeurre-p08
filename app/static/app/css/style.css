@@ -157,8 +157,7 @@ header.masthead {
 
 .banner-image {
   background-size: auto;
-  background-position: center; 
-  height: 100%;
+  background-position: center;
 }
 
 .banner h2 {
@@ -265,19 +264,22 @@ footer a:hover {
 
 .cards-product-img {
   width: 100%;
-  height: auto;
+  height: 100%;
   margin: 0 auto 5px;
+  background-size: cover;
+  background-position: center;
 }
 
-.link-product-detail {
+.cards-product-text p {
   margin-left: 5px;
+  margin-top: 0px;
 }
 
-.link-product-detail a {
+.cards-product-text a {
   text-decoration: none;
 }
 
-.link-product-detail a:hover {
+.cards-product-text a:hover {
   text-decoration: none;
   color: var(--dark-orange)
 }
@@ -322,6 +324,14 @@ footer a:hover {
   border: 2px solid white;
   box-shadow: 1px 1px 5px #345a61;
   color: #ffffff;
+}
+
+.landmark ul {
+  list-style: none;
+}
+
+.landmark li {
+  margin-bottom: 10px;
 }
 
 /* ############################# MEDIA QUERIES ############################# */

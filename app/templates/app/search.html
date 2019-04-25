@@ -26,27 +26,29 @@
             <div class="cards-product col-lg-3 col-sm-12 m-3">
                 <div class="row">
                     {% if product.nutrition_grades == 'a' %}
-                        <span class="nutriscore-a">{{ product.nutrition_grades }}</span>
+                    <span class="nutriscore-a">{{ product.nutrition_grades }}</span>
                     {% elif product.nutrition_grades == 'b' %}
-                        <span class="nutriscore-b">{{ product.nutrition_grades }}</span>
+                    <span class="nutriscore-b">{{ product.nutrition_grades }}</span>
                     {% endif %}
                     <div class="container-img">
                         <a href=" {% url 'app:detail' code_product=product.code %} ">
-                            <img class="cards-product-img" src=" {{ product.image_url }} " alt="photo produit">
+                            <div class="cards-product-img" style="background-image: url('{{ product.image_url }}')">
+                            </div>
                     </div>
-                    </a>
-                    <p><b>{{ product.product_name|truncatechars:40 }}</b>
-                        <p>
-                            <small>
-                                {{ product.brands }} - {{ product.quantity }}</p>
-                        </small>
+                    <span class="cards-product-text">
+                        <p><b>{{ product.product_name|truncatechars:40 }}</b>
+                            <p>
+                                <small>
+                                    {{ product.brands }} - {{ product.quantity }}</p>
+                            </small>
                         </p>
-
-                    <span class="link-product-detail">
+                        </a>
+                    </span>
+                    <p class="mb-2 ml-2">
                         <a href="#">
                             <i class="far fa-save"></i>
                             Sauvegarder</a>
-                    </span>
+                    </p>
                 </div>
             </div>
             {% endfor %}
