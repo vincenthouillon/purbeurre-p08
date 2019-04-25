@@ -37,55 +37,61 @@
                     </div>
                     <span class="cards-product-text">
                         <p><b>{{ product.product_name|truncatechars:40 }}</b>
-                            <p>
                                 <small>
-                                    {{ product.brands|truncatechars:30 }} - {{ product.quantity|truncatechars:10 }}</p>
+                                    <p>{{ product.brands|truncatechars:30 }} - {{ product.quantity|truncatechars:10 }}</p>
                             </small>
                         </p>
                         </a>
                     </span>
-                    <p class="mb-2 ml-2">
-                        <a href="#">
-                            <i class="far fa-save"></i>
-                            Sauvegarder</a>
+                    {% if user.is_authenticated %}
+                    <p>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="bookmark_product_code" value="{{ product.code }}">
+                            <button class="btn btn-sm btn-outline-primary  mt-0 ml-2"><i class="far fa-save"></i> Sauvegarder</button>
+                        </form>
                     </p>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
         </div>
-        
-        <!-- https://docs.djangoproject.com/fr/2.2/topics/pagination/ -->
+
+        {# https://docs.djangoproject.com/fr/2.2/topics/pagination/ #}
+        {# https://getbootstrap.com/docs/4.0/components/pagination/ #}
         {% if paginate %}
         <div class="clearfix"></div>
         <div class="container center my-4">
             <nav>
                 <ul class="pagination pagination-sm flex-wrap justify-content-center" style="text-overflow: ellipsis;">
-                  {% if products.has_previous %}
-                      <li class="page-item"><a class="page-link" href="?query={{ query }}&page={{ products.previous_page_number }}">Précédent</a></li>
-                  {% endif %}
-    
-                  {% for page in products.paginator.page_range %}
-                    {% if page %}
-                      {% ifequal page products.number %}
-                        <li class="page-item active">
-                          <span class="page-link">{{ page }}</span>
-                        </li>
-                      {% else %}
-                        <li class="page-item">
-                          <a href="?query={{ query }}&page={{ page }}" class="page-link">{{ page }}</a>
-                        </li>
-                      {% endifequal %}
-                    {% else %}
-                      <li class="page-item disabled"><span class="page-link">. . .</span></li>
+                    {% if products.has_previous %}
+                    <li class="page-item"><a class="page-link"
+                            href="?query={{ query }}&page={{ products.previous_page_number }}">Précédent</a></li>
                     {% endif %}
-                  {% endfor %}
-                  {% if products.has_next %}
-                      <li class="page-item"><a class="page-link" href="?query={{ query }}&page={{ products.next_page_number }}">Suivant</a></li>
-                  {% endif %}
+
+                    {% for page in products.paginator.page_range %}
+                    {% if page %}
+                    {% ifequal page products.number %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ page }}</span>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a href="?query={{ query }}&page={{ page }}" class="page-link">{{ page }}</a>
+                    </li>
+                    {% endifequal %}
+                    {% else %}
+                    <li class="page-item disabled"><span class="page-link">. . .</span></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if products.has_next %}
+                    <li class="page-item"><a class="page-link"
+                            href="?query={{ query }}&page={{ products.next_page_number }}">Suivant</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>
-    
+
         {% endif %}
     </div>
 </div>

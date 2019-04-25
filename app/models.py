@@ -1,6 +1,7 @@
 # https://docs.djangoproject.com/fr/2.2/topics/db/models/
 from django.db import models
 from django.contrib import admin
+from django.contrib.auth.models import User
 
 
 class Product(models.Model):
@@ -40,3 +41,16 @@ class Product(models.Model):
 
 class ProductAdmin(admin.ModelAdmin):
     search_fields = ['product_name']
+
+
+class Bookmark(models.Model):
+    bookmark = models.ForeignKey(
+        Product, related_name='bookmark', on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, related_name='user', on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return str({
+            "bookmark": self.bookmark,
+            "user": self.user
+        })

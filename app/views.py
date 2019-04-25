@@ -1,13 +1,14 @@
 import requests
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib.postgres.search import SearchVector
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from .forms import SignupForm
-from .models import Product
+from .models import Bookmark, Product
 
 # Banner's images
 IMG = '/static/app/img/bg-masthead.jpg'
@@ -31,7 +32,7 @@ def signup_page(request):
         password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=password)
         login(request, user)
-        return redirect('/app/home')
+        return redirect('')
     else:
         form = SignupForm()
 
@@ -133,7 +134,21 @@ def search_page(request):
     except:
         raise Http404
 
-    # Pagination
+    if request.user.is_authenticated and request.method == 'POST':
+        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        qs_bookmark = Bookmark.objects.filter(user = request.user)
+        
+        bookmark_id = list()
+        for i in qs_bookmark:
+            bookmark_id.append(i.bookmark.id)
+
+        for s in substitution_products:
+            if s.id in bookmark_id:
+                print('SAVED     !',s.id)
+            else:
+                print('NOT SAVED !', s.id)
+
+        # PAGINATION
     # https://docs.djangoproject.com/fr/2.2/topics/pagination/
     paginator = Paginator(substitution_products, 9)  # 9 products by page
     page = request.GET.get('page')
@@ -144,6 +159,7 @@ def search_page(request):
         substitution_products = paginator.page(1)
     except EmptyPage:
         substitution_products = paginator.page(paginator.num_pages)
+    # /PAGINATION    
 
     template_name = 'app/search.html'
     context = {
@@ -157,7 +173,6 @@ def search_page(request):
         'products': substitution_products,
         'paginate': True
     }
-    
     return render(request, template_name, context)
 
 
@@ -229,3 +244,13 @@ def detail_page(request, code_product):
         'product_url': product.url,
     }
     return render(request, template_name, context)
+
+
+@login_required
+def saved_page(request):
+    template_name = 'app/bookmarks.html'
+
+    products_saved = Bookmark.objects.filter(user=request.user)
+    print(products_saved)
+
+    return render(request, template_name)
