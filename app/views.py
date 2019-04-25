@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from .forms import SignupForm
 from .models import Product
@@ -132,8 +133,21 @@ def search_page(request):
     except:
         raise Http404
 
+    # Pagination
+    # https://docs.djangoproject.com/fr/2.2/topics/pagination/
+    paginator = Paginator(substitution_products, 9)  # 9 products by page
+    page = request.GET.get('page')
+
+    try:
+        substitution_products = paginator.page(page)
+    except PageNotAnInteger:
+        substitution_products = paginator.page(1)
+    except EmptyPage:
+        substitution_products = paginator.page(paginator.num_pages)
+
     template_name = 'app/search.html'
     context = {
+        'query': query,
         'img': IMG,
         'requested_title': f"1er résultat Open Food Facts pour : {query}",
         'requested_product_name': requested_product['products'][0]['product_name'],
@@ -141,8 +155,9 @@ def search_page(request):
         'requested_product_quantity': requested_product['products'][0]['quantity'],
         'requested_product_image': requested_product['products'][0]['image_url'],
         'products': substitution_products,
+        'paginate': True
     }
-
+    
     return render(request, template_name, context)
 
 
@@ -211,6 +226,6 @@ def detail_page(request, code_product):
         'product_sugars': product.sugars,
         'salt_landmark': salt_landmark,
         'product_salt': product.salt,
-        'product_url': product.url
+        'product_url': product.url,
     }
     return render(request, template_name, context)
