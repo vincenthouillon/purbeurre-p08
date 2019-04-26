@@ -43,14 +43,17 @@
                         </p>
                         </a>
                     </span>
+                    
                     {% if user.is_authenticated %}
-                    <p>
-                        <form method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="bookmark_product_code" value="{{ product.code }}">
-                            <button class="btn btn-sm btn-outline-primary  mt-0 ml-2"><i class="far fa-save"></i> Sauvegarder</button>
-                        </form>
-                    </p>
+                        {% if not product.id in bookmarks %}
+                        <p>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="bookmark_product_code" value="{{ product.id }}">
+                                <button class="btn btn-sm btn-outline-primary  mt-0 ml-2"><i class="far fa-save"></i> Sauvegarder</button>
+                            </form>
+                        </p>
+                        {% endif %}
                     {% endif %}
                 </div>
             </div>
@@ -91,7 +94,6 @@
                 </ul>
             </nav>
         </div>
-
         {% endif %}
     </div>
 </div>

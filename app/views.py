@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.search import SearchVector
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import Http404
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render, HttpResponseRedirect
 
 from .forms import SignupForm
 from .models import Bookmark, Product
@@ -32,7 +32,7 @@ def signup_page(request):
         password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=password)
         login(request, user)
-        return redirect('')
+        return redirect('app/account/')
     else:
         form = SignupForm()
 
@@ -134,21 +134,20 @@ def search_page(request):
     except:
         raise Http404
 
-    if request.user.is_authenticated and request.method == 'POST':
-        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    bookmark_id = list()
+    if request.user.is_authenticated:
         qs_bookmark = Bookmark.objects.filter(user = request.user)
         
-        bookmark_id = list()
         for i in qs_bookmark:
             bookmark_id.append(i.bookmark.id)
 
-        for s in substitution_products:
-            if s.id in bookmark_id:
-                print('SAVED     !',s.id)
-            else:
-                print('NOT SAVED !', s.id)
-
-        # PAGINATION
+    if request.method == 'POST':
+        request_post = request.POST.get('bookmark_product_code')
+        Bookmark.objects.create(user=request.user, bookmark_id=request_post)
+        return HttpResponseRedirect(request.get_full_path())
+    
+        
+    # PAGINATION
     # https://docs.djangoproject.com/fr/2.2/topics/pagination/
     paginator = Paginator(substitution_products, 9)  # 9 products by page
     page = request.GET.get('page')
@@ -171,7 +170,8 @@ def search_page(request):
         'requested_product_quantity': requested_product['products'][0]['quantity'],
         'requested_product_image': requested_product['products'][0]['image_url'],
         'products': substitution_products,
-        'paginate': True
+        'paginate': True,
+        'bookmarks': bookmark_id,
     }
     return render(request, template_name, context)
 
@@ -248,9 +248,34 @@ def detail_page(request, code_product):
 
 @login_required
 def saved_page(request):
-    template_name = 'app/bookmarks.html'
+    template_name = 'app/bookmark.html'
 
     products_saved = Bookmark.objects.filter(user=request.user)
-    print(products_saved)
+    # products_saved = products_saved.order_by('Product.nutrition_grades')
 
-    return render(request, template_name)
+    if request.method == 'POST':
+        request_post = request.POST.get('bookmark_product_code')
+
+        Bookmark.objects.get(bookmark_id=request_post, user=request.user).delete()
+        return HttpResponseRedirect(request.get_full_path())
+
+
+    # PAGINATION
+    # https://docs.djangoproject.com/fr/2.2/topics/pagination/
+    paginator = Paginator(products_saved, 9)  # 9 products by page
+    page = request.GET.get('page')
+
+    try:
+        products_saved = paginator.page(page)
+    except PageNotAnInteger:
+        products_saved = paginator.page(1)
+    except EmptyPage:
+        products_saved = paginator.page(paginator.num_pages)
+    # /PAGINATION    
+
+    context = {
+        'products': products_saved,
+        'paginate': True,
+    }
+
+    return render(request, template_name, context)

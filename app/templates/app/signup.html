@@ -13,13 +13,9 @@
                     {{ field.label_tag }} {{ field }}
                     <span class="help-text">{{ field.help_text }}</span>
                 </div>
-                <div class="mx-auto text-center">
-                    {% for error in field.errors %}
-                    <p>{{ error }}</p>
-                    {% endfor %}
-                </div>
             </div>
             {% endfor %}
+    
 
             <button class="btn btn-dark" type="submit">S'enregister</button>
             <div class="sign-in">

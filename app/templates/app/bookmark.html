@@ -3,10 +3,86 @@
 {% load static %}
 
 {% block content %}
-
 <div class="section">
     <div class="container">
         <h1>Mes produits favoris</h1>
+    </div>
+
+    <div class="container-fluid">
+        <h2 class="title-substitute text-center">Vos aliments favoris :</h2>
+        <div class="row mb-4 mx-auto justify-content-center">
+            {% for product in products %}
+            <div class="cards-product col-lg-3 col-sm-12 m-3">
+                <div class="row">
+                    {% if product.bookmark.nutrition_grades == 'a' %}
+                    <span class="nutriscore-a">{{ product.bookmark.nutrition_grades }}</span>
+                    {% elif product.bookmark.nutrition_grades == 'b' %}
+                    <span class="nutriscore-b">{{ product.bookmark.nutrition_grades }}</span>
+                    {% endif %}
+                    <div class="container-img">
+                        <a href="#">
+                            <div class="cards-product-img"
+                                style="background-image: url('{{ product.bookmark.image_url }}')">
+                            </div>
+                    </div>
+                    <span class="cards-product-text">
+                        <p><b>{{ product.bookmark.product_name|truncatechars:40 }}</b>
+                            <small>
+                                <p>{{ product.bookmark.brands|truncatechars:30 }} -
+                                    {{ product.bookmark.quantity|truncatechars:10 }}</p>
+                            </small>
+                        </p>
+                        </a>
+                    </span>
+                    <p>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="bookmark_product_code" value="{{ product.bookmark.id }}">
+                            <button class="btn btn-sm btn-outline-primary  mt-0 ml-2"><i class="far fa-trash-alt"></i>
+                                Supprimer</button>
+                        </form>
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {# https://docs.djangoproject.com/fr/2.2/topics/pagination/ #}
+        {# https://getbootstrap.com/docs/4.0/components/pagination/ #}
+        {% if paginate %}
+        <div class="clearfix"></div>
+        <div class="container center my-4">
+            <nav>
+                <ul class="pagination pagination-sm flex-wrap justify-content-center" style="text-overflow: ellipsis;">
+                    {% if products.has_previous %}
+                    <li class="page-item"><a class="page-link"
+                            href="?query={{ query }}&page={{ products.previous_page_number }}">Précédent</a></li>
+                    {% endif %}
+
+                    {% for page in products.paginator.page_range %}
+                    {% if page %}
+                    {% ifequal page products.number %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ page }}</span>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a href="?query={{ query }}&page={{ page }}" class="page-link">{{ page }}</a>
+                    </li>
+                    {% endifequal %}
+                    {% else %}
+                    <li class="page-item disabled"><span class="page-link">. . .</span></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if products.has_next %}
+                    <li class="page-item"><a class="page-link"
+                            href="?query={{ query }}&page={{ products.next_page_number }}">Suivant</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+        {% endif %}
     </div>
 </div>
 

@@ -12,8 +12,9 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='app/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='app/logout.html'), name='logout'),
     path('account/', views.account_page, name='account'),
-    path('legal', views.legal_page, name='legal'),
-    path('contact', views.contact_page, name='contact'),
-    path('search', views.search_page, name='search'),
-    path('<code_product>', views.detail_page, name='detail'),
+    path('legal/', views.legal_page, name='legal'),
+    path('contact/', views.contact_page, name='contact'),
+    path('search/', views.search_page, name='search'),
+    path('bookmarks/', views.saved_page, name='bookmarks'),
+    path('<code_product>/', views.detail_page, name='detail'),
 ]
