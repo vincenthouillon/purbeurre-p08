@@ -13,6 +13,7 @@ from .forms import SignupForm
 from .models import Bookmark, Product
 
 from django.contrib.auth.forms import AuthenticationForm
+from django.urls import reverse
 
 # Banner's images
 IMG = '/static/app/img/bg-masthead.jpg'
@@ -67,7 +68,7 @@ def signup_page(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('app/account/')
+            return redirect(reverse('app:account'))
     else:
         form = SignupForm()
 
