@@ -30,7 +30,7 @@
     <div class="container">
         <h2 class="text-center mt-0">Colette et Remy</h2>
         <hr class="divider my-4">
-        <h4>De la ratatouille aux croissants</h4>
+        <h4 text-center>De la ratatouille aux croissants</h4>
         <p>Pur Beurre est l'initiative de deux amoureux de la gastronomie française, Colette Tatou et Rémy, que vous
             avez déjà certainement rencontrés dans notre excellent restaurant Ratatouille. </p>
         <div class="row">
@@ -62,7 +62,26 @@
 </section>
 
 <!-- Contact Section -->
-<section class="page-section" id="contact">
-    {% include 'app/layouts/contact.html' %}
-</section>
+<div class="page-section">
+        <div class="container-fluid" id="contact">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mt-0">Contactez-nous !</h2>
+                    <hr class="divider my-4">
+                    <p class="mb-5">Nous vous répondrons dans les plus brefs délais.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 ml-auto text-center">
+                    <i class="fas fa-phone fa-3x mb-3"></i>
+                    <p>+1 (202) 555-0149</p>
+                </div>
+                <div class="col-lg-4 mr-auto text-center">
+                    <i class="fas fa-envelope fa-3x mb-3"></i>
+                    <!-- Make sure to change the email address in anchor text AND the link below! -->
+                    <a class="d-block" href="mailto:contact@purbeurre.com">contact@purbeurre.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

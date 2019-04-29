@@ -20,6 +20,7 @@
     </div>
 
     <div class="container-fluid">
+        {% if products %}
         <h2 class="title-substitute text-center">Vous pouvez remplacer cet aliment par :</h2>
         <div class="row mb-4 mx-auto justify-content-center">
             {% for product in products %}
@@ -37,20 +38,21 @@
                     </div>
                     <span class="cards-product-text">
                         <p><b>{{ product.product_name|truncatechars:40 }}</b>
-                                <small>
-                                    <p>{{ product.brands|truncatechars:30 }} - {{ product.quantity|truncatechars:10 }}</p>
+                            <small>
+                                <p>{{ product.brands|truncatechars:30 }} - {{ product.quantity|truncatechars:10 }}</p>
                             </small>
                         </p>
                         </a>
                     </span>
-                    
+
                     {% if user.is_authenticated %}
                         {% if not product.id in bookmarks %}
                         <p>
                             <form method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="bookmark_product_code" value="{{ product.id }}">
-                                <button class="btn btn-sm btn-outline-primary  mt-0 ml-2"><i class="far fa-save"></i> Sauvegarder</button>
+                                <button class="btn btn-sm btn-outline-primary  mt-0 ml-2"><i class="far fa-save"></i>
+                                    Sauvegarder</button>
                             </form>
                         </p>
                         {% endif %}
@@ -58,7 +60,11 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <p class="text-center">Désolé, nous n'avons pas trouvé de produits de substitution pour : <b>{{ query }}</b>
+            </p>
         </div>
+        {% endif %}
 
         {# https://docs.djangoproject.com/fr/2.2/topics/pagination/ #}
         {# https://getbootstrap.com/docs/4.0/components/pagination/ #}

@@ -1,15 +1,23 @@
 {% extends 'app/layouts/base.html' %}
-
 {% load static %}
+
+{% block head_title %}Favoris{% endblock %}
 
 {% block content %}
 <div class="section">
-    <div class="container">
-        <h1>Mes produits favoris</h1>
+    <div class="banner" style="background-image: url('{{ img }}')">
+        <div class="text-center text-banner">
+            <h2>Mes produits favoris</h2>
+        </div>
     </div>
 
+    {% if products %}
     <div class="container-fluid">
-        <h2 class="title-substitute text-center">Vos aliments favoris :</h2>
+        <h2 class="title-substitute text-center">Vous avez {{ products|length }}
+            {% if products|length > 1 %} produit(s) enregistré(s).
+            {% else %} produit enregistré.
+            {% endif %}
+        </h2>
         <div class="row mb-4 mx-auto justify-content-center">
             {% for product in products %}
             <div class="cards-product col-lg-3 col-sm-12 m-3">
@@ -20,7 +28,7 @@
                     <span class="nutriscore-b">{{ product.bookmark.nutrition_grades }}</span>
                     {% endif %}
                     <div class="container-img">
-                        <a href="#">
+                        <a href="{% url 'app:detail' code_product=product.bookmark.code %}">
                             <div class="cards-product-img"
                                 style="background-image: url('{{ product.bookmark.image_url }}')">
                             </div>
@@ -45,6 +53,9 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <h2 class="title-substitute text-center">Vous n'avez pas de produits favoris</h2>
+            {% endif %}
         </div>
 
         {# https://docs.djangoproject.com/fr/2.2/topics/pagination/ #}

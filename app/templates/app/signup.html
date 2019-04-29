@@ -9,11 +9,16 @@
             {% csrf_token %}
             {% for field in form %}
             <div class="row">
-                <div class="col-10 m-1">
+                <div class="col-12 m-1">
                     {{ field.label_tag }} {{ field }}
                     <span class="help-text">{{ field.help_text }}</span>
                 </div>
             </div>
+            <div class="col-12 m-0">
+                    {% for error in field.errors %}
+                        <p style="color: #d63031">⚠ {{ error }}</p>
+                    {% endfor %}
+                </div>
             {% endfor %}
     
 

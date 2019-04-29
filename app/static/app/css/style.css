@@ -122,10 +122,6 @@ header.masthead {
   color: var(--dark-orange);
 }
 
-.page-section h4 {
-  text-align: center;
-}
-
 .page-section p,
 .page-section a {
   font-family: "Scope one", sans-serif;
@@ -141,11 +137,7 @@ header.masthead {
   height: 300px;
 }
 
-#contact {
-  background-color: var(--light-orange);
-}
-
-.banner{
+.banner {
   height: 200px;
   color: #ffffff;
   text-shadow: 1px 1px 5px var(--light-orange);
@@ -221,6 +213,14 @@ footer a:hover {
   font-weight: bold;
 }
 
+#contact {
+  padding-top: 100px;
+  margin-top: -200px;
+  padding-bottom: 60px;
+  margin-bottom: -130px;
+  background-color: var(--light-orange)
+}
+
 .help-text {
   font-size: 0.7em;
 }
@@ -238,14 +238,14 @@ footer a:hover {
 }
 
 .cards-product {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid var(--dark-orange);
   background-color: #ffffff;
   font-size: 0.8em;
 }
 
 .cards-product:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid var(--dark-blue);
 }
 
@@ -296,9 +296,12 @@ footer a:hover {
   height: 40px;
   top: -15px;
   right: -15px;
-  background: #038141;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #0dc96b, #038141);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #0dc96b, #038141); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #038141;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #0dc96b, #038141);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #0dc96b, #038141);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   border-radius: 50%;
   border: 2px solid white;
   box-shadow: 1px 1px 5px #345a61;
@@ -317,9 +320,12 @@ footer a:hover {
   height: 40px;
   top: -15px;
   right: -15px;
-  background: #85bb2f;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #bdf760, #85bb2f);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #bdf760, #85bb2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #85bb2f;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #bdf760, #85bb2f);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #bdf760, #85bb2f);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   border-radius: 50%;
   border: 2px solid white;
   box-shadow: 1px 1px 5px #345a61;
@@ -332,6 +338,19 @@ footer a:hover {
 
 .landmark li {
   margin-bottom: 10px;
+}
+
+.errorlist li {
+  list-style: none;
+  color: #d63031;
+}
+
+.alert-error {
+  position: relative;
+  margin-bottom: -50px;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
 }
 
 /* ############################# MEDIA QUERIES ############################# */

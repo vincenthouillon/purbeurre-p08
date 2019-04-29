@@ -71,7 +71,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'purbeurre.wsgi.application'
 
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'app/home/'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

@@ -1,14 +1,18 @@
 import requests
-from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.postgres.search import SearchVector
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import Http404
-from django.shortcuts import get_object_or_404, redirect, render, HttpResponseRedirect
+from django.shortcuts import (HttpResponseRedirect, get_object_or_404,
+                              redirect, render)
 
 from .forms import SignupForm
 from .models import Bookmark, Product
+
+from django.contrib.auth.forms import AuthenticationForm
 
 # Banner's images
 IMG = '/static/app/img/bg-masthead.jpg'
@@ -22,17 +26,48 @@ def home_page(request):
     return render(request, template_name)
 
 
+def signout(request):
+    logout(request)
+    messages.add_message(request, messages.INFO,
+                         'Vous êtes déconnecté avec succès...')
+    return redirect('app:home')
+
+
+def signin(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, f"Vous êtes connecté, {username}")
+                return redirect('/')
+            else:
+                messages.error(
+                    request, "Nom d'utilisateur ou mot de passe invalide.")
+        else:
+            messages.error(
+                request, "Nom d'utilisateur ou mot de passe invalide.")
+    form = AuthenticationForm()
+    return render(request=request,
+                  template_name="app/login.html",
+                  context={"form": form})
+
+
 def signup_page(request):
     """User login page."""
 
-    form = SignupForm(request.POST)
-    if form.is_valid():
-        form.save()
-        username = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password1')
-        user = authenticate(username=username, password=password)
-        login(request, user)
-        return redirect('app/account/')
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('app/account/')
     else:
         form = SignupForm()
 
@@ -41,7 +76,6 @@ def signup_page(request):
         'form': form,
         'title': "S'enregister"
     }
-
     return render(request, template_name, context)
 
 
@@ -136,8 +170,8 @@ def search_page(request):
 
     bookmark_id = list()
     if request.user.is_authenticated:
-        qs_bookmark = Bookmark.objects.filter(user = request.user)
-        
+        qs_bookmark = Bookmark.objects.filter(user=request.user)
+
         for i in qs_bookmark:
             bookmark_id.append(i.bookmark.id)
 
@@ -145,8 +179,7 @@ def search_page(request):
         request_post = request.POST.get('bookmark_product_code')
         Bookmark.objects.create(user=request.user, bookmark_id=request_post)
         return HttpResponseRedirect(request.get_full_path())
-    
-        
+
     # PAGINATION
     # https://docs.djangoproject.com/fr/2.2/topics/pagination/
     paginator = Paginator(substitution_products, 9)  # 9 products by page
@@ -158,7 +191,7 @@ def search_page(request):
         substitution_products = paginator.page(1)
     except EmptyPage:
         substitution_products = paginator.page(paginator.num_pages)
-    # /PAGINATION    
+    # /PAGINATION
 
     template_name = 'app/search.html'
     context = {
@@ -250,15 +283,16 @@ def detail_page(request, code_product):
 def saved_page(request):
     template_name = 'app/bookmark.html'
 
+    # Filter and sort results by nutriscore
     products_saved = Bookmark.objects.filter(user=request.user)
-    # products_saved = products_saved.order_by('Product.nutrition_grades')
+    products_saved = products_saved.order_by('bookmark_id__nutrition_grades')
 
     if request.method == 'POST':
         request_post = request.POST.get('bookmark_product_code')
 
-        Bookmark.objects.get(bookmark_id=request_post, user=request.user).delete()
+        Bookmark.objects.get(bookmark_id=request_post,
+                             user=request.user).delete()
         return HttpResponseRedirect(request.get_full_path())
-
 
     # PAGINATION
     # https://docs.djangoproject.com/fr/2.2/topics/pagination/
@@ -271,11 +305,11 @@ def saved_page(request):
         products_saved = paginator.page(1)
     except EmptyPage:
         products_saved = paginator.page(paginator.num_pages)
-    # /PAGINATION    
+    # /PAGINATION
 
     context = {
+        'img': IMG,
         'products': products_saved,
         'paginate': True,
     }
-
     return render(request, template_name, context)
