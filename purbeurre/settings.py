@@ -27,7 +27,7 @@ DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 print(f'DEBUG: {DEBUG}')
 
 
-ALLOWED_HOSTS = ['hv-purbeurre-app.herokuapp.com', '*']
+ALLOWED_HOSTS = ['hv-purbeurre-app.herokuapp.com']
 
 
 # Application definition
@@ -84,8 +84,6 @@ DATABASES = {
         'NAME': 'purbeurre',
         'USER': os.environ.get('USER'),
         'PASSWORD': os.environ.get('PASSWORD'),
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
     }
 }
 
