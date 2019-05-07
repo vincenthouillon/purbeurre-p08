@@ -1,7 +1,5 @@
 # Pur Beurre
 
-:construction: In contruction
-
 > OpenClassrooms // Application Developer Training - Python // Project 08
 
 >  [Link to the project Management Board](https://github.com/vincenthouillon/purbeurre-app/projects/1)
@@ -15,7 +13,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-> Python 3
+> Python 3, PostgreSQL
 
 ### Installing
 
@@ -34,7 +32,7 @@ cd purbeurre-app
 
 Install dependencies in the virtual environment:
 
-```python
+```console
 pipenv install
 ```
 
@@ -45,17 +43,26 @@ python venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-To launch the program with Windows:
+> [!IMPORTANT]
+> Create a database 'purbeurre' in PostgreSQL.
 
-```python
-manage.py runserver
+To create the tables in the database:
+```console
+manage.py makemigrations
+manage.py migrate
 ```
 
-To launch the program with Unix system:
+To populate database:
 
-```python
-python manage.py runserver
-```
+| Windows           | | Unix system               |
+|-------------------|-|---------------------------|
+| manage.py getdata | | python manage.py getdata  |
+
+To launch the program:
+
+| Windows             | | Unix system                 |
+|---------------------|-|-----------------------------|
+| manage.py runserver | | python manage.py runserver  |
 
 And open your browser to the following address '**localhost:8000**'.
 
@@ -64,28 +71,18 @@ For disable the virtal environnement, enter:
 deactivate
 ```
 
-<!-- ## Running the tests
+## Running the tests
 
-> Using '**pytest**':
-
-### Installation
-
-```console
-pip install pytest
-```
 Run tests:
 
-```python
-pytest -v
-``` -->
+| Windows        | | Unix system            |
+|----------------|-|------------------------|
+| manage.py test | | python manage.py test  |
 
-<!-- ![Screenshot](grandpy/static/img/test.png) -->
 
 ## Deployment
 
-> :construction: Work in progress
-
-<!-- > This project is visible on [Heroku](https://hv-purbeurre.herokuapp.com/). -->
+> This project is visible on [Heroku](https://hv-purbeurre.herokuapp.com/).
 
 ## Built With
 

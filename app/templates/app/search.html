@@ -5,102 +5,101 @@
 
 {% block content %}
 <div class="section">
-    <div class="banner-image" style="background-image: url('{{ requested_product_image }}')">
-        <div class="banner">
-            <div class="text-center">
-                <h2>{{ requested_product_name }}</h2>
-                <h3>
-                    <small>
-                        {{ requested_product_brands }} - {{ requested_product_quantity }}
-                    </small>
-                </h3>
-                <p><small> {{ requested_title }}</small></p>
-            </div>
-        </div>
-    </div>
+	<div class="banner-image" style="background-image: url('{{ requested_product_image }}')">
+		<div class="banner">
+			<div class="text-center">
+				<h2>{{ requested_product_name }}</h2>
+				<h3>
+					<small>
+						{{ requested_product_brands }} - {{ requested_product_quantity }}
+					</small>
+				</h3>
+				<p><small> {{ requested_title }}</small></p>
+			</div>
+		</div>
+	</div>
 
-    <div class="container-fluid">
-        {% if products %}
-        <h2 class="title-substitute text-center">Vous pouvez remplacer cet aliment par :</h2>
-        <div class="row mb-4 mx-auto justify-content-center">
-            {% for product in products %}
-            <div class="cards-product col-lg-3 col-sm-12 m-3">
-                <div class="row">
-                    {% if product.nutrition_grades == 'a' %}
-                    <span class="nutriscore-a">{{ product.nutrition_grades }}</span>
-                    {% elif product.nutrition_grades == 'b' %}
-                    <span class="nutriscore-b">{{ product.nutrition_grades }}</span>
-                    {% endif %}
-                    <div class="container-img">
-                        <a href=" {% url 'app:detail' code_product=product.code %} ">
-                            <div class="cards-product-img" style="background-image: url('{{ product.image_url }}')">
-                            </div>
-                    </div>
-                    <span class="cards-product-text">
-                        <p><b>{{ product.product_name|truncatechars:40 }}</b>
-                            <small>
-                                <p>{{ product.brands|truncatechars:30 }} - {{ product.quantity|truncatechars:10 }}</p>
-                            </small>
-                        </p>
-                        </a>
-                    </span>
+	{% if products %}
+	<div class="container-fluid">
+		<h2 class="title-substitute text-center">Vous pouvez remplacer cet aliment par :</h2>
+		<div class="row mb-4 mx-auto justify-content-center">
+			{% for product in products %}
+			<div class="cards-product col-lg-3 col-sm-12 m-3">
+				<div class="row">
+					{% if product.nutrition_grades == 'a' %}
+					<span class="nutriscore-a">{{ product.nutrition_grades }}</span>
+					{% elif product.nutrition_grades == 'b' %}
+					<span class="nutriscore-b">{{ product.nutrition_grades }}</span>
+					{% endif %}
+					<div class="container-img">
+						<a href=" {% url 'app:detail' code_product=product.code %} ">
+							<div class="cards-product-img" style="background-image: url('{{ product.image_url }}')">
+							</div>
+					</div>
+					<span class="cards-product-text">
+						<p><b>{{ product.product_name|truncatechars:40 }}</b>
+							<small>
+								<p>{{ product.brands|truncatechars:30 }} - {{ product.quantity|truncatechars:10 }}</p>
+							</small>
+						</p>
+						</a>
+					</span>
 
-                    {% if user.is_authenticated %}
-                        {% if not product.id in bookmarks %}
-                        <p>
-                            <form method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="bookmark_product_code" value="{{ product.id }}">
-                                <button class="btn btn-sm btn-outline-primary  mt-0 ml-2"><i class="far fa-save"></i>
-                                    Sauvegarder</button>
-                            </form>
-                        </p>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            </div>
-            {% endfor %}
-            {% else %}
-            <p class="text-center">Désolé, nous n'avons pas trouvé de produits de substitution pour : <b>{{ query }}</b>
-            </p>
-        </div>
-        {% endif %}
+					{% if user.is_authenticated %}
+					{% if not product.id in bookmarks %}
+					<p>
+						<form method="POST">
+							{% csrf_token %}
+							<input type="hidden" name="bookmark_product_code" value="{{ product.id }}">
+							<button class="btn btn-sm btn-outline-primary  mt-0 ml-2"><i class="far fa-save"></i>
+								Sauvegarder</button>
+						</form>
+					</p>
+					{% endif %}
+					{% endif %}
+				</div>
+			</div>
+			{% endfor %}
+			{% else %}
+			<p class="text-center">Désolé, nous n'avons pas trouvé de produits de substitution pour : <b>{{ query }}</b>
+			</p>
+			{% endif %}
+		</div>
 
-        {# https://docs.djangoproject.com/fr/2.2/topics/pagination/ #}
-        {# https://getbootstrap.com/docs/4.0/components/pagination/ #}
-        {% if paginate %}
-        <div class="clearfix"></div>
-        <div class="container center my-4">
-            <nav>
-                <ul class="pagination pagination-sm flex-wrap justify-content-center" style="text-overflow: ellipsis;">
-                    {% if products.has_previous %}
-                    <li class="page-item"><a class="page-link"
-                            href="?query={{ query }}&page={{ products.previous_page_number }}">Précédent</a></li>
-                    {% endif %}
+		{# https://docs.djangoproject.com/fr/2.2/topics/pagination/ #}
+		{# https://getbootstrap.com/docs/4.0/components/pagination/ #}
+		{% if paginate %}
+		<div class="container center my-4">
+			<nav>
+				<ul class="pagination pagination-sm flex-wrap justify-content-center" style="text-overflow: ellipsis;">
+					{% if products.has_previous %}
+					<li class="page-item"><a class="page-link"
+							href="?query={{ query }}&page={{ products.previous_page_number }}">Précédent</a></li>
+					{% endif %}
 
-                    {% for page in products.paginator.page_range %}
-                    {% if page %}
-                    {% ifequal page products.number %}
-                    <li class="page-item active">
-                        <span class="page-link">{{ page }}</span>
-                    </li>
-                    {% else %}
-                    <li class="page-item">
-                        <a href="?query={{ query }}&page={{ page }}" class="page-link">{{ page }}</a>
-                    </li>
-                    {% endifequal %}
-                    {% else %}
-                    <li class="page-item disabled"><span class="page-link">. . .</span></li>
-                    {% endif %}
-                    {% endfor %}
-                    {% if products.has_next %}
-                    <li class="page-item"><a class="page-link"
-                            href="?query={{ query }}&page={{ products.next_page_number }}">Suivant</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </div>
-        {% endif %}
-    </div>
+					{% for page in products.paginator.page_range %}
+					{% if page %}
+					{% ifequal page products.number %}
+					<li class="page-item active">
+						<span class="page-link">{{ page }}</span>
+					</li>
+					{% else %}
+					<li class="page-item">
+						<a href="?query={{ query }}&page={{ page }}" class="page-link">{{ page }}</a>
+					</li>
+					{% endifequal %}
+					{% else %}
+					<li class="page-item disabled"><span class="page-link">. . .</span></li>
+					{% endif %}
+					{% endfor %}
+					{% if products.has_next %}
+					<li class="page-item"><a class="page-link"
+							href="?query={{ query }}&page={{ products.next_page_number }}">Suivant</a></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</div>
+		{% endif %}
+	</div>
 </div>
 {% endblock content %}

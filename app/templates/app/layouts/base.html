@@ -2,67 +2,68 @@
 
 <!DOCTYPE html>
 <html lang="fr">
-    
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" type="image/png" href="{% static 'app/img/favicon.png' %}" />
-        <meta name="description" content="Du gras, oui, mais de qualité">
-        <meta name="author" content="Vincent Houillon">
-        
-        <title>Pur Beurre - {% block head_title %}{% endblock %}</title>
 
-    <!-- Font Awesome Icons -->
-    <link href="{% static 'app/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" type="image/png" href="{% static 'app/img/favicon.png' %}" />
+	<meta name="description" content="Du gras, oui, mais de qualité">
+	<meta name="author" content="Vincent Houillon">
 
-    <!-- Google Fonts -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Scope+One" type="text/css">
+	<title>Pur Beurre - {% block head_title %}{% endblock %}</title>
 
-    <!-- Plugin CSS -->
-    <link href="{% static 'app/vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+	<!-- Font Awesome Icons -->
+	<link href="{% static 'app/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
 
-    <!-- Theme CSS - Includes Bootstrap -->
-    <link href="{% static 'app/css/creative.min.css' %}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}">
+	<!-- Google Fonts -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Scope+One" type="text/css">
+
+	<!-- Plugin CSS -->
+	<link href="{% static 'app/vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+
+	<!-- Theme CSS - Includes Bootstrap -->
+	<link href="{% static 'app/css/creative.min.css' %}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}">
 </head>
 
 <!-- body -->
+
 <body id="page-top">
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{ message }}
-    </div>
-    {% endfor %}
-    {% endif %}
+	{% if messages %}
+	{% for message in messages %}
+	<div class="alert alert-{{ message.tags }} alert-dismissable">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		{{ message }}
+	</div>
+	{% endfor %}
+	{% endif %}
 
-    {% include 'app/layouts/navbar.html' %}
+	{% include 'app/layouts/navbar.html' %}
 
-    {% block content %}{% endblock content%}
+	{% block content %}{% endblock content%}
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <a class="col-6" href="{% url 'app:legal' %}">Mentions légales</a>
-                <a class="col-6" href="{% url 'app:home' %}#contact">Contact</a>
-            </div>
-        </div>
-    </footer>
+	<!-- Footer -->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<a class="col-6" href="{% url 'app:legal' %}">Mentions légales</a>
+				<a class="col-6" href="{% url 'app:home' %}#contact">Contact</a>
+			</div>
+		</div>
+	</footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'app/vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'app/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script src="{% static 'app/vendor/jquery/jquery.min.js' %}"></script>
+	<script src="{% static 'app/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="{% static 'app/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
-    <script src="{% static 'app/vendor/scrollreveal/scrollreveal.min.js' %}"></script>
-    <script src="{% static 'app/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+	<!-- Plugin JavaScript -->
+	<script src="{% static 'app/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+	<script src="{% static 'app/vendor/scrollreveal/scrollreveal.min.js' %}"></script>
+	<script src="{% static 'app/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
 
-    <!-- Custom scripts for this template -->
-    <script src="{% static 'app/js/creative.min.js' %}"></script>
+	<!-- Custom scripts for this template -->
+	<script src="{% static 'app/js/creative.min.js' %}"></script>
 </body>
 
 </html>
