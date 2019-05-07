@@ -82,7 +82,7 @@ Run tests:
 
 ## Deployment
 
-> This project is visible on [Heroku](https://hv-purbeurre.herokuapp.com/).
+> This project is visible on [Heroku](https://hv-purbeurre-app.herokuapp.com/).
 
 ## Built With
 
