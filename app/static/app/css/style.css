@@ -58,6 +58,7 @@ svg {
   height: 30px;
   fill: currentColor;
   transform: rotate(45deg);
+  -moz-transform: rotate(20deg);
 }
 
 .fas {
